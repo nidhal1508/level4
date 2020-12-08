@@ -4,16 +4,16 @@ const router = express.Router();
 const User = require('../models/userSchema');
 
 // get a list of users from database
-router.get('/users',function (req, res, next) {
-    User.find({}).then(function(user) {
-        res.send(user);
+router.get('/users',async (req, res, next) =>{
+   await User.find({}).then(function(user) {
+       res.send(user);
     });
     
 });
 // get a  users from database by id
-router.get('/users/:id',function (req, res, next) {
+router.get('/users/:id',async (req, res, next) => {
 
-    User.findOne({_id:req.params.id}).populate("todos") // key to populate
+    await User.findOne({_id:req.params.id}).populate("todos") // key to populate
      .then(user => {
         res.json(user); 
      });
@@ -23,25 +23,25 @@ router.get('/users/:id',function (req, res, next) {
 
 
 // add a new users to the database
-router.post('/users',function (req,res, next) {
-    User.create(req.body).then(function (user) {
+router.post('/users',async (req,res, next) => {
+    await User.create(req.body).then(function (user) {
         res.send(user) ;
     
     }).catch(next);
 });
 
 // update a users in database
-router.put('/users/:id',function (req,res, next) {
-    User.findByIdAndUpdate({_id:req.params.id}, req.body).then(function () {
-        User.findOne({_id:req.params.id}).then(function (user) {
+router.put('/users/:id',async (req,res, next) =>{
+    await User.findByIdAndUpdate({_id:req.params.id}, req.body).then(async () =>{
+        await User.findOne({_id:req.params.id}).then(function (user) {
         res.send(user);
     }); 
     });  
 });
 
 // delete a users from the database
-router.delete('/users/:id', function (req,res, next) {
-    User.findByIdAndRemove({_id:req.params.id}).then(function (user) {
+router.delete('/users/:id', async (req,res, next) =>{
+    await User.findByIdAndRemove({_id:req.params.id}).then(function (user) {
         res.send(user);
         
     });  

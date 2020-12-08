@@ -13,6 +13,6 @@ description:String
 
 
 
-const todo = mongoose.model('todo', TodoSchema);
+const Todo = mongoose.model('todo', TodoSchema);
 
-module.exports = todo;
+module.exports = Todo;
