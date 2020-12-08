@@ -13,12 +13,14 @@ router.get('/users',function (req, res, next) {
 // get a  users from database by id
 router.get('/users/:id',function (req, res, next) {
 
-    User.findOne({_id:req.params.id}).then(function (user) {
-        res.send(user);
+    User.findOne({_id:req.params.id}).populate("todos") // key to populate
+     .then(user => {
+        res.json(user); 
+     });
     });
   
     
-});
+
 
 // add a new users to the database
 router.post('/users',function (req,res, next) {
@@ -59,10 +61,10 @@ router.post('/deleteTodoId/:idUser/:idTodo', async (req,res)=>{
     res.json(user);
 });
 
-User.findOne({_id: userId })
-   .populate("todos") // key to populate
-   .then(user => {
-      res.json(user); 
-   });
+// User.findOne({_id: userId })
+//    .populate("todos") // key to populate
+//    .then(user => {
+//       res.json(user); 
+//    });
 //export router 
 module.exports = router;
