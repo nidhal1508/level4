@@ -44,4 +44,4 @@ router.delete('/all/:id', async (req,res, next) =>{
     });  
 });
 
-module.exports = Todo;
+module.exports = router;

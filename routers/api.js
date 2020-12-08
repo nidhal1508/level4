@@ -49,14 +49,14 @@ router.delete('/users/:id', async (req,res, next) =>{
 
 
 // delete todo from user
-router.post('/deleteTodoId/:idUser/:idTodo', async (req,res)=>{
-    const updatedUser = await User.findByIdAndUpdate(req.params.idUser, { $pull : {todos:  req.params.idTodo}});
+router.post('/updateTodoId/:idUser/:idTodo', async (req,res)=>{
+    const updatedUser = await User.findByIdAndUpdate(req.params.idUser, { $push : {todos:  req.params.idTodo}});
     const user = await User.findById(req.params.idUser);
     res.json(user);
 });
 // update a todos from users
 router.post('/deleteTodoId/:idUser/:idTodo', async (req,res)=>{
-    const updatedUser = await User.findByIdAndUpdate(req.params.idUser, { $push : {todos:  req.params.idTodo}});
+    const updatedUser = await User.findByIdAndUpdate(req.params.idUser, { $pull : {todos:  req.params.idTodo}});
     const user = await User.findById(req.params.idUser);
     res.json(user);
 });

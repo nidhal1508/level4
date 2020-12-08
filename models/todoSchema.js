@@ -4,8 +4,14 @@ const Schema = mongoose.Schema;
 // create todo schema 
 
 const TodoSchema= new Schema({
-Name :String,
-description:String
+    name: {
+        type: String,
+        required:[true,'Name is required']
+    },
+     description:{
+        type: String,
+        required:[true,'description is required']
+    }
 
 })
 
