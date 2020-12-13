@@ -10,11 +10,13 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/userdb');
 mongoose.Promise = global.Promise;
 
+
+
 //import router
 const routes = require('./routers/api');
 const routestodo=require('./routers/apitodo');
 const routesemail=require('./routers/email');
-
+const routesupload=require('./routers/apiuploadimg');
 //set up express app
 // or const app = require('express');
 const app = express();
@@ -28,7 +30,9 @@ app.use('/api',routes);
  app.use('/apitodo',routestodo);
  
  app.use('/apiemail',routesemail);
-
+ 
+ app.use('/apiuploadimg',routesupload);
+  
 //error handling middlewaree
 app.use(function (err , req , res , next) {
    res.status(422).send({error: err.message});

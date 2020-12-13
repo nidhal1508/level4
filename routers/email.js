@@ -71,16 +71,15 @@ const email = require('nodemailer');
  const router = express.Router();
 
 
- console.log("nidhal2222")
 
 //create transporter
 
-    console.log("nidhal")
+   
 let transporter = email.createTransport({
     service: 'gmail',
     auth :{
-user:"****************",
-pass:"***********"
+user:"********",
+pass:"*********"
 
     }
 })
@@ -93,7 +92,11 @@ router.put('/sendingmail',function (req,res) {
         from:"nidhal1508@gmail.com",
         to:"nidhaltest1508@gmail.com",
         subject:"testNodemail",
-        text:"test working"
+        text:"test working",
+        img:{
+            type: img,
+            src :"./upload/1607862056322bonjourrrr-30.jpg"
+        }
     };
 //send email
  transporter.sendMail(mailOptions, function (err , data) {
