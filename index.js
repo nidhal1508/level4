@@ -26,8 +26,10 @@ app.use('/api',routes);
 //or  app.use('/api',require('./routers/api');
 
  app.use('/apitodo',routestodo);
+ 
  app.use('/apiemail',routesemail);
-//error handling middleware
+
+//error handling middlewaree
 app.use(function (err , req , res , next) {
    res.status(422).send({error: err.message});
 })
