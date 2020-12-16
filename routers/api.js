@@ -78,15 +78,31 @@ router.post('/cmd/:idUser/:idArticle', async (req, res) => {
     res.json(user);
 });
 
-// get cmd from user chaque 2 seconde
-router.get('/cmd/:idUser', async (req, res) => {
+// delete cmd from user chaque 2 seconde
+router.post('/cmd/:idUser', async (req, res) => {
     cron.schedule('*/2 * * * * *', async () => {
         console.log('running a task every 2 seconde');
+        const updatedUser = await User.findByIdAndUpdate(req.params.idUser, { $pull: { todos: req.params.idTodo } });
         const user = await User.findById(req.params.idUser);
-        const cmd = await User.findById(req.params.idUser).cmd
-        res.send(user);
+        res.json(user);
     });
 });
+//get cmd from user
+
+router.get('/userscmd/:id', async (req, res, next) => {
+    cron.schedule('*/2 * * * * *', async () => {
+        console.log('running a task every 2 seconde');
+
+        User.findOne({ _id: req.params.id }).populate("cmd") // key to populate
+            .then(user => {
+                console.log(user.cmd);
+                res.json(user.cmd);
+                
+            });
+    });
+});
+
+
 
 // User.findOne({_id: userId })
 //    .populate("todos") // key to populate
