@@ -42,7 +42,9 @@ password:{
 },
 // geometry: GeoSchema
 
-todos:[{type:Schema.Types.ObjectId,ref:'todo'}]
+todos:[{type:Schema.Types.ObjectId,ref:'todo'}],
+image:[{type:Schema.Types.ObjectId,ref:'image'}],
+cmd:[{type:Schema.Types.ObjectId,ref:'pannier'}]
     
 
    

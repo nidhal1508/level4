@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 //connect to mongodb
 mongoose.connect('mongodb://localhost/userdb');
 mongoose.Promise = global.Promise;
-
+const path = require('path');
 
 
 //import router
@@ -17,6 +17,9 @@ const routes = require('./routers/api');
 const routestodo=require('./routers/apitodo');
 const routesemail=require('./routers/email');
 const routesupload=require('./routers/apiuploadimg');
+const routesSendImg=require('./routers/sendimg');
+const routesPannier=require('./routers/apiPanier');
+
 //set up express app
 // or const app = require('express');
 const app = express();
@@ -31,7 +34,9 @@ app.use('/api',routes);
  
  app.use('/apiemail',routesemail);
  
- app.use('/apiuploadimg',routesupload);
+ app.use('/apiuploadimg',express.static('upload'),routesupload);
+ app.use('/apisendimg',routesSendImg);
+ app.use('/apiPannier',routesPannier);
   
 //error handling middlewaree
 app.use(function (err , req , res , next) {
